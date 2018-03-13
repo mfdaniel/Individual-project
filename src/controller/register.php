@@ -1,4 +1,16 @@
 <?php
+if (session_id() == '') {
+  echo "not logged in";
+  echo session_id();    
+  session_start();
+}else{
+  echo "you are logged in";
+  echo session_id();
+}
+    
+$_SESSION=[];
+session_destroy();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $username = $_POST['username'] ?? null;
@@ -31,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Store data';
         return;
     }
-    ;
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,15 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	<div>
     		 <form action="/index.php/register" method= "POST">
         		<h1>Sign-up</h1>
-            	<label for ="username">Your username:</label><?php if(! ($usernameSuccess ?? true)) {?>
+            	<label for ="username">Your username:</label><?php
+            
+            if (! ($usernameSuccess ?? true)) {
+                ?>
            				 <div>
             				<p style="color:red">You have an error in your username</p>
           				 </div>
-               			 <?php 
-                                };
-                            ?>
+               			 <?php
+            }
+            ;
+            ?>
                     
-                    <input type="text" name="username" value=" <?php echo htmlentities($username ?? "");?>"/>
+                    <input type="text" name="username" placeholder="username" value="<?php echo htmlentities($username ?? "");?>"/>
                 
                     <br/>
                 

@@ -1,41 +1,30 @@
+<?php
+if (session_id() == '') {
+    // session has not started
+    session_start();
+};
 
+var_dump("session-key= " . session_id());
+
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>My personal Warehouse login</title>
+        <title>My personal  login</title>
     </head>
     <body>
     	<div>
-    		 <form action="/index.php/login" method= "POST">
+    		 <form action="/index.php/login" method= "GET">
         		<h1>Log-In</h1>
-            	<label for ="username">Your username:</label><?php if(! ($usernameSuccess ?? true)) {?>
-           				 <div>
-            				<p style="color:red">You have an error in your username</p>
-          				 </div>
-               			 <?php 
-                                };
-                            ?>
-                    
-                    <input type="text" name="username" value=" <?php echo htmlentities($username ?? "");?>"/>
-                
+            	<label for ="username">Your username:</label>
+            	                    
+                    <input type="text" name="username" placeholder="username" value="<?php echo htmlentities($username ?? "");?>"/>
                     <br/>
                 
                     <label for = "password">Your password:</label>
                     <input type="password" name="password1"/>
-                
-                    <br/>
-
-                        <?php
-                        
-                        if (! ($passwordSuccess ?? true)) {
-                            ?>
-                            <div>
-                            	<p style="color:red" >Your password has an error</p>
-                            </div>
-                        <?php
-                        }
-                        ?>
                 
                     <br/>
                     
